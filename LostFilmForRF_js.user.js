@@ -2,7 +2,7 @@
 // @name        LostFilmForRF
 // @namespace   lf4rf
 // @include     *www.lostfilm.tv/series/*
-// @version     1
+// @version     1.1
 // @grant       none
 // ==/UserScript==
 
@@ -12,7 +12,7 @@ for (var i = 0; i < seasons.length; i++) {
   if (seasons[i].querySelector('div.external-btn2') !== null) {
     var btnseasons = seasons[i].querySelector('div.external-btn2');
     if (btnseasons.getAttribute('onclick') === 'copyrightedEpisode()') {
-      btnseasons.setAttribute('onclick', 'PlayEpisode(' + btnseasons.nextElementSibling.getAttribute('data-code').replace(/-/g,",") + ',999)');
+      btnseasons.setAttribute('onclick', 'PlayEpisode(' + btnseasons.nextElementSibling.getAttribute('data-episode') + ')');
       btnseasons.setAttribute('class', 'external-btn');
     }
   }
@@ -22,7 +22,7 @@ var series = document.querySelectorAll('div.series-block tr:not(.not-available)'
 for (var i = 0; i < series.length; i++) {
   if (series[i].querySelector('div.external-btn2') !== null) {
     var btnseries = series[i].querySelector('div.external-btn2');
-    btnseries.setAttribute('onclick', 'PlayEpisode(' + series[i].querySelector('td.alpha > .haveseen-btn').getAttribute('data-code').replace(/-/g,",") + ')');
+    btnseries.setAttribute('onclick', 'PlayEpisode(' + series[i].querySelector('td.alpha > .haveseen-btn').getAttribute('data-episode') + ')');
     btnseries.setAttribute('class', 'external-btn');
   }
 }
@@ -30,7 +30,7 @@ for (var i = 0; i < series.length; i++) {
 // episode
 if (document.querySelector('div.overlay-pane > div.external-btn2') !== null) {
   var episode = document.querySelector('div.overlay-pane > div.external-btn2');
-  episode.setAttribute('onclick', 'PlayEpisode(' + document.querySelector('div.isawthat-btn').getAttribute('data-code').replace(/-/g,",") + ')');
+  episode.setAttribute('onclick', 'PlayEpisode(' + document.querySelector('div.isawthat-btn').getAttribute('data-episode') + ')');
   episode.setAttribute('class', 'external-btn');
 }
 
@@ -42,7 +42,7 @@ for (var i = 0; i < preview.length; i++) {
   td.className = 'zeta';
   div.className = 'external-btn';
   if (preview[i].querySelector('td.alpha > .haveseen-btn').getAttribute('data-code') !== null) {
-    div.setAttribute('onclick', 'PlayEpisode(' + preview[i].querySelector('td.alpha > .haveseen-btn').getAttribute('data-code').replace(/-/g,",") + ')');
+    div.setAttribute('onclick', 'PlayEpisode(' + preview[i].querySelector('td.alpha > .haveseen-btn').getAttribute('data-episode') + ')');
   }
   else {
     div.className += ' inactive';
